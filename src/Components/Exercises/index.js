@@ -15,26 +15,43 @@ const styles = {
     }
 }
 
-export default props =>
+// use object destructuring to get props directly from props
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+export default ({
+    exercises, category, onSelect,
+    exercise: {
+        id,
+        title = 'Welcome!',
+        description = 'Please select an exercise from the list on the left.'
+    }
+}) =>
     <Grid container>
         <Grid item sm>
             <Paper style={styles.Paper}>
-                {props.exercises.map((group, exercises) =>
-                    <Fragment key={group[0]}>
-                        <Typography
-                            variant="headline"
-                            style={{textTransform: 'capitalize'}}
-                        >
-                            {group[0]}
-                        </Typography>
-                        <List component="ul">
-                            {group[1].map(exercise =>
-                                <ListItem button key={exercise.id}>
-                                    <ListItemText primary={exercise.title} />
-                                </ListItem>
-                            )}
-                        </List>
-                    </Fragment>
+                {/* more array destructuring */}
+                {exercises.map(([group, exercises]) =>
+                    !category || category === group
+                        ? <Fragment key={group}>
+                                <Typography
+                                    variant="headline"
+                                    style={{textTransform: 'capitalize'}}
+                                >
+                                    {group}
+                                </Typography>
+                                <List component="ul">
+                                    {/* more object destructuring */}
+                                    {exercises.map(({ id, title }) =>
+                                        <ListItem
+                                            button
+                                            onClick={() => onSelect(id)}
+                                            key={id}
+                                        >
+                                            <ListItemText primary={title} />
+                                        </ListItem>
+                                    )}
+                                </List>
+                            </Fragment>
+                        : null
                 )}
             </Paper>
         </Grid>
@@ -43,13 +60,13 @@ export default props =>
                 <Typography
                     variant="display1"
                 >
-                    Welcome!
+                    {title}
                 </Typography>
                 <Typography
                     variant="subheading"
                     style={{marginTop: 20}}
                 >
-                    Please select an exercise from the list on the left.
+                    {description}
                 </Typography>
             </Paper>
         </Grid>
