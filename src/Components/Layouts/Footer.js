@@ -7,14 +7,15 @@ const footer = (props) => {
         <Paper>
             <Tabs
                 value={0} // default selected tab
-                // onChange={this.handleChange}
+                onChange={this.props.onSelect}
                 indicatorColor="primary"
                 textColor="primary"
                 centered
             >
-                <Tab label="Item One" />
-                <Tab label="Item Two" />
-                <Tab label="Item Three" />
+                <Tab label="All" />
+                {props.muscles.map(group =>
+                    <Tab label={group} key={group} />
+                )}
             </Tabs>
         </Paper>
     );
