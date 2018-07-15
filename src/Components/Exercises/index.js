@@ -1,9 +1,19 @@
 import React, { Fragment } from 'react';
 
 import {
-    Grid, Paper, Typography, List, ListItem, ListItemText
+    Grid,
+    Paper,
+    Typography,
+    List,
+    ListItem,
+    ListItemText,
+    ListItemSecondaryAction,
+    IconButton
 } from '@material-ui/core';
 
+import {
+    Delete
+} from '@material-ui/icons';
 
 const styles = {
     Paper: {
@@ -18,7 +28,7 @@ const styles = {
 // use object destructuring to get props directly from props
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
 export default ({
-    exercises, category, onSelect,
+    exercises, category, onSelect, onDelete,
     exercise: {
         id,
         title = 'Welcome!',
@@ -44,9 +54,14 @@ export default ({
                                         <ListItem
                                             button
                                             onClick={() => onSelect(id)}
-                                            key={id}
+                                             key={id}
                                         >
                                             <ListItemText primary={title} />
+                                            <ListItemSecondaryAction>
+                                                <IconButton onClick={() => onDelete(id)}>
+                                                    <Delete />
+                                                </IconButton>
+                                            </ListItemSecondaryAction>
                                         </ListItem>
                                     )}
                                 </List>
