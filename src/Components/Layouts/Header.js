@@ -4,6 +4,8 @@ import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import CreateDialog from '../Exercises/Dialogs/Create';
 
 const header = (props) => {
+    const { muscles, onExerciseCreate } = props;
+
     return <AppBar position="static">
         <Toolbar>
             <Typography
@@ -14,7 +16,10 @@ const header = (props) => {
                 Exercise Database
             </Typography>
 
-            <CreateDialog/>
+            <CreateDialog
+                muscles={muscles}
+                onCreate={onExerciseCreate}
+            />
         </Toolbar>
     </AppBar>
 }
