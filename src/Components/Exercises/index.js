@@ -25,7 +25,7 @@ export default ({
         description = 'Please select an exercise from the list on the left.'
     }
 }) =>
-    <Grid container>
+    <Grid container spacing={8}>
         <Grid item sm>
             <Paper style={styles.Paper}>
                 {/* more array destructuring */}
